@@ -23,6 +23,7 @@ def main():
     heart_symbol = u'\u2764'
     guessed_word_correctly = False
     unknown_letters = len(secret_word)
+    guessed_list = []
     
     difficulty_verification = False
     difficulty = 0
@@ -55,9 +56,23 @@ def main():
             guessed_word_correctly = True
             break
 
+        if len(guess) == len(secret_word) and guess.lower() != secret_word.lower():
+            print("Incorrect. '" + guess + "' is not the secret word. You lose a life.")
+            lives -= 1
+            continue
+
+        if guess.lower() in guessed_list:
+            print("'" + guess + "' has already been guessed! Try a new letter.")
+            continue
+        else:
+            guessed_list.append(guess)
+
         if guess.lower() in secret_word or guess.upper() in secret_word:
             clue, unknown_letters = update_clue(guess, secret_word, clue, unknown_letters)
-            print("Correct, '" + guess + "' is in the secret word!")
+            suffix = ''
+            if unknown_letters != 1:
+                suffix = 's'
+            print("Correct, '" + guess + "' is in the secret word! You have " + str(unknown_letters) + " letter" + suffix + " left to guess.")
         else:
             print('Incorrect. You lose a life.')
             lives -= 1
@@ -67,9 +82,9 @@ def main():
             break
         
     if guessed_word_correctly:
-        print('You won! The secret word was ' + secret_word)
+        print("You won! The secret word was '" + secret_word + "'")
     else:
-        print('You lost! The secret word was ' + secret_word)
+        print("You lost! The secret word was '" + secret_word + "'")
 
 if __name__ == "__main__":
     main()
