@@ -17,6 +17,24 @@ def main():
     clue = list('?????')
     heart_symbol = u'\u2764'
     guessed_word_correctly = False
+    
+    difficulty_verification = False
+    difficulty = 0
+    while not difficulty_verification:
+        mode = input('Welcome to NINE LIVES! Choose difficulty (type 1, 2 or 3):\n 1 Easy\n 2 Normal\n 3 Hard\n')
+        if mode == '1' or mode == '2' or mode == '3':
+            difficulty += int(mode)
+            difficulty_verification = True
+    
+    if difficulty == 1:
+        lives = 12
+        print("Easy difficulty it is. Let's play!")
+    elif difficulty == 2:
+        lives = 9
+        print("Normal difficulty it is. Let's play!")
+    else:
+        lives = 6
+        print("Hard difficulty it is. Let's play!")
 
     while lives > 0:
         print(clue)
