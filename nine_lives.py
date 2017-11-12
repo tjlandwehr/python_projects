@@ -1,22 +1,28 @@
 import random
 
-def update_clue(guessed_letter, secret_word, clue):
+def update_clue(guessed_letter, secret_word, clue, unknown_letters):
     index = 0
     while index < len(secret_word):
-        if guessed_letter == secret_word[index]:
-            clue[index] = guessed_letter
+        if guessed_letter.lower() == secret_word[index].lower():
+            clue[index] = secret_word[index]
+            unknown_letters -= 1
         index += 1
-    return clue
+    return clue, unknown_letters
 
-
+# 'pizza', 'fairy', 'teeth', 'shirt', 'otter', 'plane', 'brush', 'horse', 'light', 
 
 def main():
     lives = 9
-    words = ['pizza', 'fairy', 'teeth', 'shirt', 'otter', 'plane', 'brush', 'horse', 'light']
+    words = ['Mississippi']
     secret_word = random.choice(words)
-    clue = list('?????')
+    clue = []
+    index = 0
+    while index < len(secret_word):
+        clue.append('?')
+        index += 1
     heart_symbol = u'\u2764'
     guessed_word_correctly = False
+    unknown_letters = len(secret_word)
     
     difficulty_verification = False
     difficulty = 0
@@ -45,16 +51,20 @@ def main():
             print('Please print one letter at a time, or you can guess the whole word at once!')
             continue
 
-        if guess == secret_word:
+        if guess.lower() == secret_word.lower():
             guessed_word_correctly = True
             break
 
-        if guess in secret_word:
-            clue = update_clue(guess, secret_word, clue)
+        if guess.lower() in secret_word or guess.upper() in secret_word:
+            clue, unknown_letters = update_clue(guess, secret_word, clue, unknown_letters)
             print("Correct, '" + guess + "' is in the secret word!")
         else:
             print('Incorrect. You lose a life.')
             lives -= 1
+        
+        if unknown_letters == 0:
+            guessed_word_correctly = True
+            break
         
     if guessed_word_correctly:
         print('You won! The secret word was ' + secret_word)
