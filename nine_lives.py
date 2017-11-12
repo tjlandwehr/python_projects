@@ -9,11 +9,9 @@ def update_clue(guessed_letter, secret_word, clue, unknown_letters):
         index += 1
     return clue, unknown_letters
 
-# 'pizza', 'fairy', 'teeth', 'shirt', 'otter', 'plane', 'brush', 'horse', 'light', 
-
 def main():
     lives = 9
-    words = ['Mississippi']
+    words = ['pizza', 'fairy', 'teeth', 'shirt', 'otter', 'plane', 'brush', 'horse', 'light', 'Mississippi']
     secret_word = random.choice(words)
     clue = []
     index = 0
