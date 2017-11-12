@@ -342,10 +342,13 @@ def main():
     jeb.hideturtle()
     jeb.up()
 
-    mildred.setpos(random.randrange(-wn.window_width() / 2, wn.window_width() / 2),
-                   random.randrange(-wn.window_width() / 2, wn.window_height() / 2))
-    jeb.setpos(random.randrange(-wn.window_width() / 2, wn.window_width() / 2),
-               random.randrange(-wn.window_width() / 2, wn.window_height() / 2))
+    mildred.setpos(random.randrange(int(-wn.window_width() / 2), int(wn.window_width() / 2)),
+                   random.randrange(int(-wn.window_width() / 2), int(wn.window_height() / 2)))
+    jeb.setpos(random.randrange(int(-wn.window_width() / 2), int(wn.window_width() / 2)),
+               random.randrange(int(-wn.window_width() / 2), int(wn.window_height() / 2)))
+    
+    # mildred.setpos(random.randrange(-200, 200), random.randrange(-200, 200))
+    # jeb.setpos(random.randrange(-200, 200), random.randrange(-200, 200))
 
     mildred.showturtle()
     mildred.down()
