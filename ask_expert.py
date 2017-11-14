@@ -21,6 +21,7 @@ read_from_file()
 
 while True:
     query_country = simpledialog.askstring('Country', 'Type the name of a country:')
+    query_country = query_country.capitalize()
 
     if query_country in the_world:
         result = the_world[query_country]
